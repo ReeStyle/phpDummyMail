@@ -10,5 +10,11 @@
         }
     ],
     "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "TemplateerPHP\\": "htdocs/vendor/TemplateerPHP",
+            "App\\": "htdocs/app/"
+        }
+    },
     "require": {}
 }

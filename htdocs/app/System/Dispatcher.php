@@ -1,13 +1,10 @@
 <?php
 
-namespace App;
+namespace App\System;
 
-use App\System\Controller;
 use App\System\Router\Simple;
 use Exception;
 
-require_once 'Controller.php';
-require_once 'Router/Simple.php';
 
 class Dispatcher
 {
@@ -52,8 +49,6 @@ class Dispatcher
 			$controllerFilename = $this
 				->simpleRouteHandler()
 				->getFullControllerName();
-
-			require_once __DIR__ . '/../Http/Controller/' . $controllerFilename . '.php';
 
 			$controllerClassName = 'App\Http\Controller\\' . $controllerFilename;
 

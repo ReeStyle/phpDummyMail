@@ -2,12 +2,9 @@
 
 namespace App\System;
 
-use App\Dispatcher;
 use TemplateerPHP\TemplateerPHP;
 use Exception;
 use App\System\Interfaces\Controller as ControllerInterface;
-
-require_once __DIR__ . '/../System/Interfaces/Controller.php';
 
 abstract class Controller
 implements ControllerInterface
@@ -71,8 +68,6 @@ implements ControllerInterface
 		static $viewEngine;
 
 		if ($viewEngine === null) {
-			require_once __DIR__ . '/../../vendor/TemplateerPHP/TemplateerPHP.php';
-
 			$viewEngine = new TemplateerPHP();
 
 			$resourceBaseDir = __DIR__ . '/../views';

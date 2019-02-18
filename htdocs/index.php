@@ -1,7 +1,5 @@
 <?php
 
-ini_set('display_errors', 'on');
+require_once __DIR__ . '/../vendor/autoload.php';
 
-require_once __DIR__ . '/app/System/Dispatcher.php';
-
-\App\Dispatcher::instance()->run();
+\App\System\Dispatcher::instance()->run();

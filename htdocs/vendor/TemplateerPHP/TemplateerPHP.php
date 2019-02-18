@@ -5,9 +5,9 @@ namespace TemplateerPHP;
 use Exception;
 
 /**
- * Class Templateer
+ * Class TemplateerPHP
  *
- * @package Templateer
+ * @package TemplateerPHP
  * @author R. den Heijer
  * @license None - Free, distribute, be happy!
  *
@@ -42,6 +42,27 @@ class TemplateerPHP
 	protected $layout = 'layout/default';
 
 	/**
+	 * @var array
+	 */
+	protected $helpers = [];
+
+	/**
+	 * TemplateerPHP constructor.
+	 */
+	public final function __construct()
+	{
+		$this->init();
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public function init()
+	{
+		$this->addHelper(__NAMESPACE__ . '\\Helper\\Partial');
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getData()
@@ -60,6 +81,12 @@ class TemplateerPHP
 		return $this;
 	}
 
+	/**
+	 * @param $keyOrMass
+	 * @param null $val
+	 *
+	 * @return $this
+	 */
 	public function assign($keyOrMass, $val = null)
 	{
 		if (is_array($keyOrMass)) {
@@ -71,6 +98,23 @@ class TemplateerPHP
 				$this->data[$keyOrMass] = $val;
 			}
 		}
+
+		return $this;
+	}
+
+	/**
+	 * @param string $helperClass
+	 *
+	 * @return $this
+	 * @throws Exception
+	 */
+	public function addHelper($helperClass)
+	{
+		$helper = new $helperClass($this);
+
+		$helperKey = strtolower(basename($helperClass));
+
+		$this->helpers[$helperKey] = $helper;
 
 		return $this;
 	}
@@ -90,6 +134,14 @@ class TemplateerPHP
 		}
 
 		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getBaseDir()
+	{
+		return $this->baseDir;
 	}
 
 	/**
