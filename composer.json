@@ -1,0 +1,14 @@
+{
+    "name": "developer/phpdummymail",
+    "description": "Dummy mail recipient and client using mail() function in php",
+    "type": "project",
+    "license": "Free!",
+    "authors": [
+        {
+            "name": "Rafael den Heijer",
+            "email": "rdheijer@reestyle.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
