@@ -26,7 +26,7 @@ Usage:
 - It should already work 
 - Hit the refresh button to update mails
 
-Done, it should already be running
+Done, it should already be running. The interface should be pretty self-explanatory. 
 
 
 # License
@@ -61,8 +61,7 @@ These packages have their own license form. Please abide by them!
 If you wish to donate to the project, you can transfer the funds to my PayPal account.
 
 Remember that this software is primarily aimed at development enthusiasts that need
-a simple mail catching tool to see what their application produces when it's actually 
-sent.
+a simple mail catching tool to see what their application produces after it's sent.
 
 # Lastly
 
