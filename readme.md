@@ -9,6 +9,9 @@ Installation is simple:
 - Create an alias to the \[path_to_phpdummymail]/htdocs/ in your 
 apache config (or whatever flavor webservice you're using)
 and set index.php as primary file to invoke
+- It is PHP5.6 and PHP7 compatible: We use the Class::class which is only present in 
+versions from PHP5.6 on
+  
 
 Done, it should already be running
 
@@ -37,9 +40,6 @@ If you wish to donate to the project, you can transfer the funds to my PayPal ac
 Remember that this software is primarily aimed at development enthusiasts that need
 a simple mail catching tool to see what their application produces when it's actually 
 sent.
-
-Yes it is PHP5.6 and PHP7 compatible: We use the Class::class which is only present in 
-versions from PHP5.6 on
 
 # Lastly
 
