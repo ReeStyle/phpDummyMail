@@ -1,4 +1,20 @@
-#License
+# Usage
+
+---
+Installation is simple:
+- Unpack (or clone with git) into a folder 
+- Run 'composer install' (DO NOT run 'composer update'!)
+- Edit your php.ini (both CGI and CLI!) and edit the following line:
+    - sendmail_path = \[path_to_phpdummymail]/receiver.php
+- Run: php tester.php
+- Create an alias to the \[path_to_phpdummymail]/htdocs/ in your 
+apache config (or whatever flavor webservice you're using)
+and set index.php as primary file to invoke
+
+Done, it should already be running
+
+
+# License
 
 Use and distribution of this software requires you to abide these simple rules:
 
