@@ -17,7 +17,7 @@ class Simple
 	 *
 	 * @return $this
 	 */
-	public function run(&$controller, &$action)
+	public function run(&$controller, &$action, &$params)
 	{
 		$controller = 'index';
 		$action = 'index';
@@ -36,7 +36,7 @@ class Simple
 				}
 
 				/// whatever is left
-				$this->params = $parts;
+				$params = $parts;
 			}
 		}
 

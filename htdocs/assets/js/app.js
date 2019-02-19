@@ -1,12 +1,31 @@
 (function ($, window) {
     var app = {
         init: function (ns) {
+            var $body = $('body');
+
             app.load.maillist();
 
             $('.trigger-mailcheck').on('click', app.check.mail);
             $('.trigger-purge').on('click', app.purge);
+            $body.on('click','.trigger-mail-open', app.mailOpen);
 
             return ns;
+        },
+
+        mailOpen: function () {
+            var $this = $(this),
+                url = $('#url-mailopen').attr('href'),
+                $iframeContainer = $('.mail-iframe'),
+                $iframe = $iframeContainer.find('iframe'),
+                $noMailMessage = $('.no-mail-message');
+
+            $noMailMessage.hide();
+
+            $iframeContainer.show();
+
+            $iframe.css('height', 500);
+
+            $iframe.get(0).src = [url, $this.data('mail-id')].join('/')
         },
 
         toggleMaillistLoader: function (show) {

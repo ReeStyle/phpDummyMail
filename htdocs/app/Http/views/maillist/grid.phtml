@@ -1,16 +1,16 @@
 <?php  if(count($mails) === 0):?>
 <div class="text-muted">No mails</div>
 <?php  else: ?>
-<?php  foreach ($mails as $mail): ?>
-<div class="row">
+<?php  foreach ($mails as $mailId => $mail): ?>
+<div class="row trigger-mail-open" data-mail-id="<?=$mailId ?>">
     <div class="col-1">
-        <input type="checkbox" value="<?=$mail['id'] ?>" />
+        <input type="checkbox" value="<?=$mailId ?>" />
     </div>
     <div class="col">
         <div class="small">
             <div class="text-muted">
-            From: <?=$mail['from'] ?><br />
-            To: <?=$mail['to'] ?>
+            From: <?=htmlspecialchars($mail['from']) ?><br />
+            To: <?=htmlspecialchars($mail['to']) ?>
             </div>
 		    <?=$mail['subject'] ?>
         </div>

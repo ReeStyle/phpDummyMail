@@ -1,0 +1,7 @@
+<?php if (!$contentFound): ?>
+<div class="alert alert-warning">
+	Could not find e-mail. Is it accessible, is it readable, is it removed? What?
+</div>
+<?php else: ?>
+<pre><?=$content ?></pre>
+<?php endif ?>

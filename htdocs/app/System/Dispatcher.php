@@ -79,7 +79,7 @@ class Dispatcher
 	 */
 	public function simpleRouteHandler()
 	{
-		(new Simple())->run($this->controller, $this->action);
+		(new Simple())->run($this->controller, $this->action, $this->params);
 
 		return $this;
 	}

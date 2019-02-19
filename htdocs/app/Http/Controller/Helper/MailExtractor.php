@@ -12,7 +12,8 @@ class MailExtractor
 	 */
 	public function getBaseInfoFromFile($filePath)
 	{
-		$mailId = basename($filePath);
+		$baseName = basename($filePath);
+		$mailId = str_replace('.mail', '', $baseName);
 
 		$content = file_get_contents($filePath);
 

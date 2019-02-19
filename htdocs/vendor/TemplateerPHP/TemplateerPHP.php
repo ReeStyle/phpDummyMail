@@ -231,9 +231,10 @@ class TemplateerPHP
 		$buffer = $render($templateFile, 'template');
 
 		if ($this->isImplicitLayout()) {
+			$title = isset($this->data['pageTitle']) ? $this->data['pageTitle'] : '(unset)';
 			$this->assign([
 				'layoutContent' => $buffer,
-				'title' => 'The Templateer!',
+				'title' => $title,
 			]);
 			$layoutFile = sprintf('%s/%s.phtml', $this->baseDir , $this->getLayout());
 

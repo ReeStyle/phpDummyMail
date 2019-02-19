@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title><?=$title ?></title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="<?=$config('application.webroot') ?>/assets/vendors/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="<?=$config('application.webroot') ?>/assets/css/custom.css" />
-    <link rel="stylesheet" type="text/css" href="<?=$config('application.webroot') ?>/assets/vendors/font-awesome/css/font-awesome.min.css" />
+    <head>
+        <title><?=$title ?></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" type="text/css" href="<?=$config('application.webroot') ?>/assets/vendors/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="<?=$config('application.webroot') ?>/assets/css/custom.css" />
+        <link rel="stylesheet" type="text/css" href="<?=$config('application.webroot') ?>/assets/vendors/font-awesome/css/font-awesome.min.css" />
 
-    <link rel="section" id="url-mailcheck" href="<?=$config('application.approot') ?>/mailcheck" />
-    <link rel="section" id="url-mailpurge" href="<?=$config('application.approot') ?>/mailpurge" />
-</head>
-<body class="d-flex flex-column h-100">
-<header>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">phpDummyMail</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-            </ul>
-        </div>
-    </nav>
-</header>
+        <link rel="section" id="url-mailcheck" href="<?=$config('application.approot') ?>/mailcheck" />
+        <link rel="section" id="url-mailpurge" href="<?=$config('application.approot') ?>/mailpurge" />
+        <link rel="section" id="url-mailopen" href="<?=$config('application.approot') ?>/mailopen/content" />
+    </head>
+    <body class="d-flex flex-column h-100">
+        <header>
+            <!-- Fixed navbar -->
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <a class="navbar-brand" href="#">phpDummyMail</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
+                </div>
+            </nav>
+        </header>
 
-<!-- Begin page content -->
-<main role="main">
-    <div class="container-fluid">
-		<?=$layoutContent ?>
-    </div>
-</main>
+        <!-- Begin page content -->
+        <main role="main">
+            <div class="container-fluid">
+                <?=$layoutContent ?>
+            </div>
+        </main>
 
 
-<footer class="footer">
-    <div class="text-right">Created by ReeStyle</div>
-</footer>
+        <footer class="footer">
+            <div class="text-right">Created by ReeStyle</div>
+        </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script defer type="text/javascript" src="<?=$config('application.webroot') ?>/assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script defer type="text/javascript" src="<?=$config('application.webroot') ?>/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
-<script defer type="text/javascript" src="<?=$config('application.webroot') ?>/assets/vendors/bootbox/bootbox.all.min.js"></script>
-<script type="text/javascript" src="<?=$config('application.webroot') ?>/assets/js/app.js"></script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+        <script defer type="text/javascript" src="<?=$config('application.webroot') ?>/assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script defer type="text/javascript" src="<?=$config('application.webroot') ?>/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+        <script defer type="text/javascript" src="<?=$config('application.webroot') ?>/assets/vendors/bootbox/bootbox.all.min.js"></script>
+        <script type="text/javascript" src="<?=$config('application.webroot') ?>/assets/js/app.js"></script>
+    </body>
 </html>
