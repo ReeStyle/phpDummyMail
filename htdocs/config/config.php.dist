@@ -2,10 +2,10 @@
 
 return [
 	'ini_set' => [
-		'display_errors' => 'on',
+		'display_errors' => 'off',
 	],
 	'php_func' => [
-		'error_reporting' => E_ALL,
+		'error_reporting' => E_NONE,
 	],
 	'application' => [
 		'action_method' => 'pathinfo',

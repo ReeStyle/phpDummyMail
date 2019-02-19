@@ -1,17 +1,30 @@
 # Usage
 
+Prerequisites:
+- PHP5.6+ - It is PHP5.6 and PHP7 compatible: We use the Class::class which is only present in 
+versions from PHP5.6 on
+- Composer
+- \[path_to_phpdummymail]/mails/ and \[path_to_phpdummymail]/logs/ folders should be writable 
+for the web service (www-data on debian)  
+
+
 Installation is simple:
 - Unpack (or clone with git) into a folder 
 - Run 'composer install' (DO NOT run 'composer update'!)
 - Edit your php.ini (both CGI and CLI!) and edit the following line:
     - sendmail_path = \[path_to_phpdummymail]/receiver.php
+- Restart web service if necessary (e.g. apache fpm need to)
 - Run: php tester.php
 - Create an alias to the \[path_to_phpdummymail]/htdocs/ in your 
 apache config (or whatever flavor webservice you're using)
 and set index.php as primary file to invoke
-- It is PHP5.6 and PHP7 compatible: We use the Class::class which is only present in 
-versions from PHP5.6 on
+- Edit htdocs/config/config.php and replace '/phpdummymail' with the alias you used. You 
+may alter the other configuration items at your own risk. 
   
+Usage:
+- Within your browser go to the alias you just created
+- It should already work 
+- Hit the refresh button to update mails
 
 Done, it should already be running
 
