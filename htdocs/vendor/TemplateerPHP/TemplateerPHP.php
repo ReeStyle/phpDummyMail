@@ -112,11 +112,19 @@ class TemplateerPHP
 	{
 		$helper = new $helperClass($this);
 
-		$helperKey = strtolower(basename($helperClass));
+		$helperKey = strtolower(basename(str_replace('\\', '/', $helperClass)));
 
 		$this->helpers[$helperKey] = $helper;
 
 		return $this;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getHelpers()
+	{
+		return $this->helpers;
 	}
 
 	/**
@@ -254,6 +262,10 @@ class TemplateerPHP
 
 			if (file_exists($templateFile)) {
 				extract($templateer->getData());
+
+				foreach ($templateer->getHelpers() as $helperRef => $helperObject) {
+					$$helperRef = $helperObject;
+				}
 
 				ob_start();
 

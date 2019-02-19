@@ -2,9 +2,9 @@
 
 namespace App\System;
 
+use App\System\Config\Config;
 use App\System\Router\Simple;
 use Exception;
-
 
 class Dispatcher
 {
@@ -29,7 +29,7 @@ class Dispatcher
 	 */
 	public static function instance()
 	{
-		static $instance;
+		$instance = Registry::instance()->getReference(self::class);
 
 		if ($instance === null) {
 			$instance = new self;
@@ -39,13 +39,22 @@ class Dispatcher
 	}
 
 	/**
+	 * Dispatcher constructor.
+	 */
+	public function __construct()
+	{
+		Registry::instance()->setReference(self::class, $this);
+
+		(new Config())->run();
+	}
+
+	/**
 	 * @return $this
 	 * @throws Exception
 	 */
 	public function run()
 	{
 		if (php_sapi_name() !== 'cli') {
-
 			$controllerFilename = $this
 				->simpleRouteHandler()
 				->getFullControllerName();

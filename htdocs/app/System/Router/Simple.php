@@ -2,8 +2,14 @@
 
 namespace App\System\Router;
 
+use App\System\Registry;
+
 class Simple
 {
+	public function __construct()
+	{
+		Registry::instance()->setReference(self::class, $this);
+	}
 
 	/**
 	 * @param string $controller
@@ -17,9 +23,9 @@ class Simple
 		$action = 'index';
 
 		if (array_key_exists('PATH_INFO', $_SERVER)) {
-			$pathInfo = $_SERVER['PATH_INFO'];
-			if (!is_null($pathInfo)) {
-				$parts = explode('/', trim($pathInfo, '/'));
+			$pathInfo = trim($_SERVER['PATH_INFO'], '/');
+			if (!is_null($pathInfo) && strlen($pathInfo) > 0) {
+				$parts = explode('/', $pathInfo);
 
 				foreach ([0 => 'controller', 1 => 'action'] as $index => $part) {
 					if (isset($parts[$index])) {
@@ -36,5 +42,4 @@ class Simple
 
 		return $this;
 	}
-
 }

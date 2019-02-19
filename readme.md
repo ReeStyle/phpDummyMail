@@ -29,4 +29,8 @@ a simple mail catching tool to see what their application produces when it's act
 sent.
 
 ---
+Yes it is PHP5.6 and PHP7 compatible: We use the Class::class which is only present in 
+versions from PHP5.6 on
+
+---
 Have fun.

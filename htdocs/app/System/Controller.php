@@ -2,6 +2,9 @@
 
 namespace App\System;
 
+use App\System\Http\Request;
+use App\System\Interfaces\Output;
+use App\System\View\Helper\Config;
 use TemplateerPHP\TemplateerPHP;
 use Exception;
 use App\System\Interfaces\Controller as ControllerInterface;
@@ -10,6 +13,9 @@ abstract class Controller
 implements ControllerInterface
 {
 
+	const CURRENT_CONTROLLER = 'current_controller';
+	const REQUEST = 'request';
+
 	/**
 	 * @param string $action
 	 *
@@ -17,6 +23,8 @@ implements ControllerInterface
 	 */
 	public final function __dispatch($action)
 	{
+		Registry::instance()->setReference(self::CURRENT_CONTROLLER, $this);
+
 		if ($action === '__dispatch') {
 			print 'Loop hole!';
 			exit();
@@ -29,33 +37,47 @@ implements ControllerInterface
 
 		$return = call_user_func_array([$this, $action], Dispatcher::instance()->getParams());
 
-		$this->__render($return, $action);
+		$this->__stream($return, $action);
 	}
 
 	/**
-	 * @param $return
+	 * @return Request
+	 */
+	protected function request()
+	{
+		$request = Registry::instance()->getReference(self::REQUEST, false);
+
+		if ($request === false) {
+			$request = new Request();
+		}
+
+		return $request;
+	}
+
+	/**
+	 * @param TemplateerPHP $return
+	 * @param string $action
 	 *
 	 * @throws Exception
 	 */
-	private function __render($return, $action)
+	private function __stream($return, $action)
 	{
-		$controllerName = get_class($this);
+		$actualControllerName = (new \ReflectionClass($this))->getShortName();
 
 		if ($return instanceof TemplateerPHP) {
-
-
-			$startActualName = strrpos($controllerName, '\\') + 1;
-			$actualName = substr($controllerName, $startActualName);
-
-			$endActualName = strrpos($actualName, 'Controller');
-			$viewName = strtolower(substr($actualName, 0, $endActualName));
-			$resource = sprintf('%s/%s', $viewName, $action);
+			$endActualControllerName = strrpos($actualControllerName, 'Controller');
+			$viewBase = strtolower(substr($actualControllerName, 0, $endActualControllerName));
 
 			if ($return->getResource() === null) {
+				$resource = sprintf('%s/%s', $viewBase, $action);
 				$return->setResource($resource);
 			}
 
 			$return->render();
+		}
+
+		if ($return instanceof Output) {
+			$return->stream();
 		}
 	}
 
@@ -70,9 +92,11 @@ implements ControllerInterface
 		if ($viewEngine === null) {
 			$viewEngine = new TemplateerPHP();
 
-			$resourceBaseDir = __DIR__ . '/../views';
+			$resourceBaseDir = __DIR__ . '/../Http/views';
 
-			$viewEngine->setBaseDir($resourceBaseDir);
+			$viewEngine
+				->setBaseDir($resourceBaseDir)
+				->addHelper(Config::class);
 		}
 
 		return $viewEngine;

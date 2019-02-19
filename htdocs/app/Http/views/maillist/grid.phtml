@@ -1,0 +1,23 @@
+<?php  if(count($mails) === 0):?>
+<div class="text-muted">No mails</div>
+<?php  else: ?>
+<?php  foreach ($mails as $mail): ?>
+<div class="row">
+    <div class="col-1">
+        <input type="checkbox" value="<?=$mail['id'] ?>" />
+    </div>
+    <div class="col">
+        <div class="small">
+            <div class="text-muted">
+            From: <?=$mail['from'] ?><br />
+            To: <?=$mail['to'] ?>
+            </div>
+		    <?=$mail['subject'] ?>
+        </div>
+    </div>
+    <div class="col-12" style="border-bottom: 1px #ccc dotted">
+
+    </div>
+</div>
+<?php  endforeach ?>
+<?php  endif ?>
