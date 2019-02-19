@@ -54,14 +54,15 @@ You cannot:
 - hold me responsible for any damage, monetary or otherwise, when something 
 goes wrong while you, in any way, use this software. 
 
+**Important:** The application uses Composer, jQuery, Bootstrap, FontAwesome and BootBox.
+These packages have their own license form. Please abide by them! 
+
+# Other info
 If you wish to donate to the project, you can transfer the funds to my PayPal account.
 
 Remember that this software is primarily aimed at development enthusiasts that need
 a simple mail catching tool to see what their application produces when it's actually 
 sent.
-
-**Important:** The application uses Composer, jQuery, Bootstrap, FontAwesome and BootBox.
-These packages have their own license form. Please abide by them! 
 
 # Lastly
 
