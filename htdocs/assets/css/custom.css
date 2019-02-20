@@ -16,3 +16,8 @@ main {
     padding: 4px 8px;
     background-color: #f5f5f5;
 }
+
+.trigger-mail-open {
+    cursor: pointer;
+    *cursor: hand; /* OLD IE THING */
+}

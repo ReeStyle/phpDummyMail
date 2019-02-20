@@ -30,7 +30,7 @@ class MailopenController extends Controller
 
 		return $this
 			->getViewEngine()
-			->setImplicitLayout(false)
+			->setLayout('layout/mail')
 			->assign([
 				'content' => $content,
 				'contentFound' => $contentFound,

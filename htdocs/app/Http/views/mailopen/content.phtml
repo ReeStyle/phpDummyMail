@@ -3,5 +3,5 @@
 	Could not find e-mail. Is it accessible, is it readable, is it removed? What?
 </div>
 <?php else: ?>
-<pre><?=$content ?></pre>
+<?=nl2br(htmlspecialchars($content)) ?>
 <?php endif ?>
