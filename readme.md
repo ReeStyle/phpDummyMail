@@ -58,10 +58,14 @@ goes wrong while you, in any way, use this software.
 These packages have their own license form. Please abide by them! 
 
 # Other info
-If you wish to donate to the project, you can transfer the funds to my PayPal account.
+If you wish to:
+- participate in the project, feel free to do so by forking.
+- donate to the project, you can transfer the funds to my PayPal account.
 
+**Important notice**
 Remember that this software is primarily aimed at development enthusiasts that need
-a simple mail catching tool to see what their application produces after it's sent.
+a simple mail catching tool to see what their application produces after it's sent,
+given that your application is able to use the internal mail() function.
 
 # Lastly
 
