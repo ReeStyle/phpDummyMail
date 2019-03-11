@@ -1,5 +1,5 @@
 {
-    "name": "developer/phpdummymail",
+    "name": "ReeStyle/phpDummyMail",
     "description": "Dummy mail recipient and client using mail() function in php",
     "type": "project",
     "license": "Free!",
