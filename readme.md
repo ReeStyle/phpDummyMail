@@ -67,6 +67,9 @@ Remember that this software is primarily aimed at development enthusiasts that n
 a simple mail catching tool to see what their application produces after it's sent,
 given that your application is able to use the internal mail() function.
 
+# Screenshot(s)
+<img src="./htdocs/assets/images/preview_01.png" alt="drawing" width="200"/>
+
 # Lastly
 
 Have fun!
