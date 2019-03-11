@@ -15,4 +15,7 @@ return [
 	'mails' => [
 		'folder' => __DIR__ . '/../../mails',
 	],
+	'templateer' => [
+	    'use_minified_js' => false,
+	],
 ];

@@ -1,4 +1,6 @@
 (function ($, window, clickEvent, preventDefault) {
+    'use strict';
+
     var $maillistContainer = $('#maillist-container'),
         $body = $('body'),
         app = {

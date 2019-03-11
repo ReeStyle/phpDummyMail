@@ -2,6 +2,8 @@
 
 namespace TemplateerPHP;
 
+use App\System\Config\Config;
+use App\System\Registry;
 use Exception;
 
 /**
@@ -232,9 +234,12 @@ class TemplateerPHP
 
 		if ($this->isImplicitLayout()) {
 			$title = isset($this->data['pageTitle']) ? $this->data['pageTitle'] : '(unset)';
+			$useMinifiedJs = isset($this->data['use_minified_js']) ? $this->data['use_minified_js'] : true;
+
 			$this->assign([
 				'layoutContent' => $buffer,
 				'title' => $title,
+				'use_minified_js' => $useMinifiedJs,
 			]);
 			$layoutFile = sprintf('%s/%s.phtml', $this->baseDir , $this->getLayout());
 

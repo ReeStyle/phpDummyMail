@@ -4,6 +4,7 @@ namespace App\System;
 
 use App\System\Http\Request;
 use App\System\Interfaces\Output;
+use App\System\Config\Config as SystemConfig;
 use App\System\View\Helper\Config;
 use TemplateerPHP\TemplateerPHP;
 use Exception;
@@ -72,6 +73,12 @@ implements ControllerInterface
 				$resource = sprintf('%s/%s', $viewBase, $action);
 				$return->setResource($resource);
 			}
+
+			/** @var SystemConfig $config */
+			$config = Registry::instance()->getReference(SystemConfig::class);
+
+			$useMinified = $config->get('templateer.use_minified_js');
+			$return->assign('use_minified_js', $useMinified);
 
 			$return->render();
 		}

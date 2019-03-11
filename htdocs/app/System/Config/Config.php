@@ -58,7 +58,7 @@ class Config
 	{
 		$configData = require BASEDIR . '/config/config.php';
 
-		$configs = ['ini_set', 'php_fault_control', 'application', 'mails'];
+		$configs = ['ini_set', 'php_fault_control', 'application', 'mails', 'templateer'];
 
 		function camelize($input, $separator = '_')
 		{
@@ -117,5 +117,13 @@ class Config
 	public function mails(array $settings)
 	{
 		$this->settings['mails'] = $settings;
+	}
+
+	/**
+	 * @param array $settings
+	 */
+	public function templateer(array $settings)
+	{
+		$this->settings['templateer'] = $settings;
 	}
 }
