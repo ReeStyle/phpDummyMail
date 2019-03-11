@@ -2,6 +2,7 @@
     "name": "reestyle/phpdummymail",
     "description": "Dummy mail recipient and client using mail() function in php",
     "type": "project",
+    "version": "0.1",
     "keywords": ["mail","dummy","sendmail"],
     "homepage": "https://github.com/ReeStyle/phpDummyMail",
     "authors": [
