@@ -2,9 +2,12 @@
 
 namespace App\System;
 
-use App\System\Config\Config;
+use App\System\Router\CliSimple;
 use App\System\Router\Simple;
 use Exception;
+use App\System\Http\Controller as HttpContoller;
+use App\System\Cli\Controller as CliContoller;
+
 
 class Dispatcher
 {
@@ -25,61 +28,58 @@ class Dispatcher
 	protected $params = [];
 
 	/**
-	 * @return Dispatcher
-	 */
-	public static function instance()
-	{
-		$instance = Registry::instance()->getReference(self::class);
-
-		if ($instance === null) {
-			$instance = new self;
-		}
-
-		return $instance;
-	}
-
-	/**
 	 * Dispatcher constructor.
 	 */
 	public function __construct()
 	{
-		Registry::instance()->setReference(self::class, $this);
-
-		(new Config())->run();
+		Registry::set(self::class, $this);
 	}
 
 	/**
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function run()
+	public function run($cliCommand = null)
 	{
-		if (php_sapi_name() !== 'cli') {
-			$controllerFilename = $this
-				->simpleRouteHandler()
-				->getFullControllerName();
+		$controllerBase = php_sapi_name() === 'cli' ? 'Cli' : 'Http';
 
-			$controllerClassName = 'App\Http\Controller\\' . $controllerFilename;
+		$controllerInstanceCheck = php_sapi_name() === 'cli' ? CliContoller::class : HttpContoller::class;
 
-			/** @var Controller $controller */
-			$controller = new $controllerClassName;
+		$controllerFilename = $this
+			->simpleRouteHandler($cliCommand)
+			->getFullControllerName();
 
-			if ($controller instanceof Controller) {
-				$controller->__dispatch($this->action);
-			} else {
-				throw new Exception('Invalid controller, must implement ');
-			}
+		$controllerClassName = sprintf('App\%s\Controller\%s', $controllerBase, $controllerFilename);
+
+		/** @var Controller $controller */
+		$controller = new $controllerClassName;
+
+		if ($controller instanceof $controllerInstanceCheck) {
+			$controller->__dispatch($this->action);
+		} else {
+			throw new Exception('Invalid controller, must implement ');
 		}
 
 		return $this;
 	}
 
 	/**
+	 * @param string|null $cliCommand
+	 *
 	 * @return $this
 	 */
-	public function simpleRouteHandler()
+	public function simpleRouteHandler($cliCommand = null)
 	{
-		(new Simple())->run($this->controller, $this->action, $this->params);
+		$routerClass = php_sapi_name() !== 'cli' ? Simple::class : CliSimple::class;
+
+		/** @var Simple|CliSimple $router */
+		$router = new $routerClass();
+
+		if ($router->isCli() && is_string($cliCommand)) {
+			$router->setCliCommand($cliCommand);
+		}
+
+		$router->run($this->controller, $this->action, $this->params);
 
 		return $this;
 	}

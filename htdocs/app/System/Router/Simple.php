@@ -4,11 +4,22 @@ namespace App\System\Router;
 
 use App\System\Registry;
 
-class Simple
+class Simple extends Base
 {
+	/**
+	 * Simple constructor.
+	 */
 	public function __construct()
 	{
-		Registry::instance()->setReference(self::class, $this);
+		Registry::set(self::class, $this);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isCli()
+	{
+		return false;
 	}
 
 	/**

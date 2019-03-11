@@ -25,7 +25,7 @@ class Benchmark
 	 */
 	public function __construct()
 	{
-		Registry::instance()->setReference(self::class, $this);
+		Registry::set(self::class, $this);
 
 		$this->startTimer('application_time');
 	}

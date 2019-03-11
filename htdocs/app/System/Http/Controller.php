@@ -1,10 +1,11 @@
 <?php
 
-namespace App\System;
+namespace App\System\Http;
 
-use App\System\Http\Request;
+use App\System\Dispatcher;
 use App\System\Interfaces\Output;
 use App\System\Config\Config as SystemConfig;
+use App\System\Registry;
 use App\System\View\Helper\Config;
 use TemplateerPHP\TemplateerPHP;
 use Exception;
@@ -24,7 +25,7 @@ implements ControllerInterface
 	 */
 	public final function __dispatch($action)
 	{
-		Registry::instance()->setReference(self::CURRENT_CONTROLLER, $this);
+		Registry::set(self::CURRENT_CONTROLLER, $this);
 
 		if ($action === '__dispatch') {
 			print 'Loop hole!';
@@ -36,7 +37,7 @@ implements ControllerInterface
 			throw new Exception(sprintf('%s does not contain action %s', $controllerName, $action));
 		}
 
-		$return = call_user_func_array([$this, $action], Dispatcher::instance()->getParams());
+		$return = call_user_func_array([$this, $action], Registry::get(Dispatcher::class)->getParams());
 
 		$this->__stream($return, $action);
 	}
@@ -46,7 +47,7 @@ implements ControllerInterface
 	 */
 	protected function request()
 	{
-		$request = Registry::instance()->getReference(self::REQUEST, false);
+		$request = Registry::get(self::REQUEST, false);
 
 		if ($request === false) {
 			$request = new Request();
@@ -75,7 +76,7 @@ implements ControllerInterface
 			}
 
 			/** @var SystemConfig $config */
-			$config = Registry::instance()->getReference(SystemConfig::class);
+			$config = Registry::get(SystemConfig::class);
 
 			$useMinified = $config->get('templateer.use_minified_js');
 			$return->assign('use_minified_js', $useMinified);
@@ -99,7 +100,7 @@ implements ControllerInterface
 		if ($viewEngine === null) {
 			$viewEngine = new TemplateerPHP();
 
-			$resourceBaseDir = __DIR__ . '/../Http/views';
+			$resourceBaseDir = Registry::get(SystemConfig::class)->get('application.templates');
 
 			$viewEngine
 				->setBaseDir($resourceBaseDir)

@@ -3,10 +3,8 @@
 namespace App\Http\Controller;
 
 use App\Http\Controller\Helper\MailUtilities;
-use App\System\Config\Config;
-use App\System\Controller;
+use App\System\Http\Controller;
 use App\System\Output\JsonModel;
-use App\System\Registry;
 
 class MailremoveController extends Controller
 {

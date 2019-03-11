@@ -3,7 +3,7 @@
 namespace App\Http\Controller;
 
 use App\Http\Controller\Helper\MailUtilities;
-use App\System\Controller;
+use App\System\Http\Controller;
 use App\System\Output\JsonModel;
 
 class MailcheckController extends Controller

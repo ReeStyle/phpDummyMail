@@ -26,6 +26,32 @@ class Registry
 
 	/**
 	 * @param string $ref
+	 * @param mixed $default
+	 *
+	 * @return mixed|null
+	 */
+	public static function get($ref, $default = null)
+	{
+		!self::instance() && self::instance();
+
+		return self::instance()->getReference($ref, $default);
+	}
+
+	/**
+	 * @param string $ref
+	 * @param mixed $value
+	 *
+	 * @return mixed|null
+	 */
+	public static function set($ref, $value)
+	{
+		!self::instance() && self::instance();
+
+		return self::instance()->setReference($ref, $value);
+	}
+
+	/**
+	 * @param string $ref
 	 * @param mixed $value
 	 *
 	 * @return $this

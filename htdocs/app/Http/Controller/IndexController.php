@@ -2,7 +2,7 @@
 
 namespace App\Http\Controller;
 
-use App\System\Controller;
+use App\System\Http\Controller;
 
 class IndexController extends Controller
 {

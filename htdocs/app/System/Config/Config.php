@@ -17,7 +17,7 @@ class Config
 	 */
 	public function __construct()
 	{
-		Registry::instance()->setReference(self::class, $this);
+		Registry::set(self::class, $this);
 	}
 
 	/**
