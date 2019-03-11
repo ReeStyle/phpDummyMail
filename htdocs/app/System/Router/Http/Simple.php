@@ -1,19 +1,12 @@
 <?php
 
-namespace App\System\Router;
+namespace App\System\Router\Http;
 
 use App\System\Registry;
+use App\System\Router\Base;
 
 class Simple extends Base
 {
-	/**
-	 * Simple constructor.
-	 */
-	public function __construct()
-	{
-		Registry::set(self::class, $this);
-	}
-
 	/**
 	 * @return bool
 	 */

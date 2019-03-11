@@ -2,11 +2,11 @@
 
 namespace App\System;
 
-use App\System\Router\CliSimple;
-use App\System\Router\Simple;
+use App\System\Router\Http\Simple as HttpSimple;
+use App\System\Router\Cli\Simple as CliSimple;
 use Exception;
 use App\System\Http\Controller as HttpContoller;
-use App\System\Cli\Controller as CliContoller;
+use App\System\Cli\Controller as CliController;
 
 
 class Dispatcher
@@ -43,7 +43,7 @@ class Dispatcher
 	{
 		$controllerBase = php_sapi_name() === 'cli' ? 'Cli' : 'Http';
 
-		$controllerInstanceCheck = php_sapi_name() === 'cli' ? CliContoller::class : HttpContoller::class;
+		$controllerInstanceCheck = php_sapi_name() === 'cli' ? CliController::class : HttpContoller::class;
 
 		$controllerFilename = $this
 			->simpleRouteHandler($cliCommand)
@@ -51,7 +51,7 @@ class Dispatcher
 
 		$controllerClassName = sprintf('App\%s\Controller\%s', $controllerBase, $controllerFilename);
 
-		/** @var Controller $controller */
+		/** @var CliController|HttpContoller $controller */
 		$controller = new $controllerClassName;
 
 		if ($controller instanceof $controllerInstanceCheck) {
@@ -70,9 +70,9 @@ class Dispatcher
 	 */
 	public function simpleRouteHandler($cliCommand = null)
 	{
-		$routerClass = php_sapi_name() !== 'cli' ? Simple::class : CliSimple::class;
+		$routerClass = php_sapi_name() === 'cli' ? CliSimple::class : HttpSimple::class;
 
-		/** @var Simple|CliSimple $router */
+		/** @var CliSimple|HttpSimple $router */
 		$router = new $routerClass();
 
 		if ($router->isCli() && is_string($cliCommand)) {

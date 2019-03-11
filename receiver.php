@@ -13,7 +13,7 @@ define('BASEDIR', __DIR__ . '/htdocs');
 
 (new Config())->run();
 
-(new Dispatcher())->run('Receiver->run');
+(new Dispatcher())->run('receiver.run');
 
 (new Benchmark())->stopTimer('application_timer');
 
