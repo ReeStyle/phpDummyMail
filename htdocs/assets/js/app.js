@@ -98,6 +98,8 @@
                 $.get(url, function (response) {
                     app.toggle.mailIframe(false);
 
+                    app.toggle.maillistLoader(false);
+
                     $el.html(response.html);
 
                     app.toggle.mailButtons(response.mailCount > 0);
@@ -146,7 +148,7 @@
                     function (result) {
                         if (result) {
                             $.post(
-                                $('#url-mailpurge').attr('href'),
+                                $('#url-mailremove').attr('href'),
                                 {
                                     mailIds: ids
                                 },
@@ -175,6 +177,7 @@
                                 $('#url-mailpurge').attr('href'),
                                 function (response) {
                                     if (response.success) {
+                                        app.toggle.mailRemoveButton();
                                         app.load.maillist();
                                     } else {
                                         bootbox.alert('Something went terribly wrong');
@@ -206,7 +209,6 @@
             },
 
             unOpen: function () {
-                console.log(this);
                 app.toggle.mailIframe(false);
                 app.toggle.mailSelected(null);
             }

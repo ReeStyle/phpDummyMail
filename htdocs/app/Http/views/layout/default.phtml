@@ -8,9 +8,10 @@
         <link rel="stylesheet" type="text/css" href="<?=$config('application.webroot') ?>/assets/css/custom.css" />
         <link rel="stylesheet" type="text/css" href="<?=$config('application.webroot') ?>/assets/vendors/font-awesome/css/font-awesome.min.css" />
 
-        <link rel="section" id="url-mailcheck" href="<?=$config('application.approot') ?>/mailcheck" />
-        <link rel="section" id="url-mailpurge" href="<?=$config('application.approot') ?>/mailpurge" />
-        <link rel="section" id="url-mailopen" href="<?=$config('application.approot') ?>/mailopen/content" />
+        <link rel="section" id="url-mailcheck" href="<?=$config('application.approot') ?>/mailcheck" data-method="GET" />
+        <link rel="section" id="url-mailpurge" href="<?=$config('application.approot') ?>/mailpurge" data-method="POST" />
+        <link rel="section" id="url-mailopen" href="<?=$config('application.approot') ?>/mailopen/content" data-method="NONE" data-target="IFRAME" />
+        <link rel="section" id="url-mailremove" href="<?=$config('application.approot') ?>/mailremove" data-method="POST" />
     </head>
     <body class="d-flex flex-column h-100">
         <header>
@@ -21,8 +22,25 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto">
-                    </ul>
+                    <div class="btn-group group-enable-disable">
+                        <button class="btn btn-dark trigger-check-all" disabled>
+                            <span class="fa fa-check-square-o"></span>
+                        </button>
+                        <button class="btn btn-dark trigger-uncheck-all" disabled>
+                            <span class="fa fa-square-o"></span>
+                        </button>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-dark trigger-remove" disabled>
+                            <span class="fa fa-trash"></span>
+                        </button>
+                    </div>
+                    <button class="btn btn-dark trigger-purge button-enable-disable" disabled>
+                        Purge mails
+                    </button>
+                    <button class="btn btn-dark trigger-mailcheck">
+                        <span class="fa fa-refresh"></span>
+                    </button>
                 </div>
             </nav>
         </header>

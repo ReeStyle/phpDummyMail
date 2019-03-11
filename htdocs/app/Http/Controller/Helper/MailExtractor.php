@@ -2,6 +2,9 @@
 
 namespace App\Http\Controller\Helper;
 
+use App\System\Config\Config;
+use App\System\Registry;
+
 class MailExtractor
 {
 
@@ -58,5 +61,37 @@ class MailExtractor
 		}
 
 		return $output;
+	}
+
+	/**
+	 * @return array
+	 * @throws \Exception
+	 */
+	public function rebuildCache()
+	{
+		/** @var Config $config */
+		$config = Registry::instance()->getReference(Config::class);
+		$mailFolder = $config->get('mails.folder');
+
+		if (!$mailFolder) {
+			throw new \Exception('Mail folder not set');
+		}
+
+		$cacheFile = sprintf('%s/mail.cache', $mailFolder);
+		$filePattern = $mailFolder . '/m_*.mail';
+		$files = glob($filePattern, GLOB_MARK);
+
+		$mailCache = [];
+		foreach ($files as $file) {
+			$mailId = basename($file);
+
+			$parts = $this->getBaseInfoFromFile($file);
+
+			$mailCache[$mailId] = $parts;
+		}
+
+		file_put_contents($cacheFile, implode(PHP_EOL, $mailCache));
+
+		return $mailCache;
 	}
 }

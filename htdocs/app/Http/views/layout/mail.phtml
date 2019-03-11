@@ -14,5 +14,28 @@
 <?=$layoutContent ?>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script type="text/javascript" src="<?=$config('application.webroot') ?>/assets/vendors/popper/popper.min.js"></script>
+<script type="text/javascript" src="<?=$config('application.webroot') ?>/assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="<?=$config('application.webroot') ?>/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?=$config('application.webroot') ?>/assets/js/app.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        function resetHeightIframe() {
+            setTimeout(function () {
+                window.parent.$('#mail-iframe').css('height', $('body').height());
+            }, 150);
+        }
+
+        resetHeightIframe();
+
+        $('.nav-link').on('click', resetHeightIframe);
+        $('.nav-link:first').trigger('click');
+
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
 </body>
 </html>

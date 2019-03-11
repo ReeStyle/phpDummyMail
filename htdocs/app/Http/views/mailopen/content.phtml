@@ -1,7 +1,126 @@
+<?php
+/** @var \MS\Email\Parser\Message $message */
+/** @var bool $contentFound */
+
+$htmlBody = $message->getHtmlBody();
+$hasHtmlBody = !empty($htmlBody);
+
+$textBody = $message->getTextBody();
+$hasTextBody = !empty($textBody);
+
+/** @var \MS\Email\Parser\Attachment[] $attachments */
+$attachments = $message->getAttachments();
+$hasAttachments = is_array($attachments) && count($attachments) > 0;
+
+function processBody($body)
+{
+	$body = str_replace('3D"', '"', $body);
+
+	$body = quoted_printable_decode($body);
+
+	return $body;
+}
+
+/**
+ * @param \MS\Email\Parser\Address[] $toList
+ *
+ * @return null|string
+ */
+function processTo(array $toList)
+{
+	$output = [];
+	if (is_array($toList)) {
+		foreach ($toList as $item) {
+			if ($item->getAddress()) {
+				$to = $item->getAddress();
+				if ($item->getName()) {
+					$to = sprintf('%s <%s>', $item->getName(), $to);
+				}
+
+				$output[] = $to;
+			}
+		}
+	}
+
+	return count($output) > 0 ? htmlentities(implode(', ', $output)) : '(none)';
+}
+
+?>
 <?php if (!$contentFound): ?>
-<div class="alert alert-warning">
-	Could not find e-mail. Is it accessible, is it readable, is it removed? What?
-</div>
+    <div class="alert alert-warning">
+        Could not find e-mail. Is it accessible, is it readable, is it removed? What?
+    </div>
 <?php else: ?>
-<?=nl2br(htmlspecialchars($content)) ?>
+	<?php if (!$hasHtmlBody && !$hasTextBody): ?>
+        <div class="alert alert-warning">
+            This email does not have a text of HTML body.
+        </div>
+	<?php else: ?>
+
+        <div class="text-muted small bottom-add-border container-added-padding">
+            From: <?=processTo([$message->getFrom()])?><br/>
+            To: <?=processTo($message->getTo()->toArray())?><br/>
+            CC: <?=processTo($message->getCC()->toArray())?><br/>
+            Subject: <?=$message->getSubject()?>
+        </div>
+        <div class="bottom-add-border container-added-padding container-added-padding-top">
+            <span class="text-muted fa fa-paperclip"></span>
+			<?php if (!$hasAttachments): ?>
+                <span class="badge badge-info">
+                    No attachments
+                </span>
+			<?php else: ?>
+                <span class="badge badge-info">
+                    <?=count($attachments)?> items
+                </span>
+				<?php foreach ($attachments as $attachment): ?>
+                    <a href="#" class="badge badge-secondary" data-toggle="tooltip" data-placement="top"
+                       title="<?=$attachment->getFilename()?> (<?=$attachment->getMimeType()?>)">
+						<?=$attachment->getFilename()?>
+                    </a>
+				<?php endforeach ?>
+			<?php endif ?>
+        </div>
+
+
+        <ul class="nav nav-pills" id="myTab" role="tablist">
+			<?php if ($hasHtmlBody): ?>
+                <li class="nav-item">
+                    <a class="nav-link small" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                       aria-controls="home" aria-selected="true">
+                        HTML
+                    </a>
+                </li>
+			<?php endif ?>
+			<?php if ($hasTextBody): ?>
+                <li class="nav-item">
+                    <a class="nav-link small" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                       aria-controls="profile" aria-selected="false">
+                        Plain text
+                    </a>
+                </li>
+			<?php endif ?>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+		<?php if ($hasHtmlBody): ?>
+            <div class="tab-pane" id="home" role="tabpanel" aria-labelledby="home-tab">
+				<?php if (is_array($htmlBody)): ?>
+					<?php foreach ($htmlBody as $part): ?>
+						<?=processBody($part['body'])?>
+					<?php endforeach ?>
+				<?php else: ?>
+					<?=processBody($htmlBody)?>
+				<?php endif ?>
+            </div>
+		<?php endif ?>
+		<?php if ($hasTextBody): ?>
+            <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+				<?=nl2br(htmlentities($textBody))?>
+            </div>
+		<?php endif ?>
+        </div>
+
+
+
+	<?php endif ?>
 <?php endif ?>

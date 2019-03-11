@@ -17,6 +17,21 @@ main {
     background-color: #f5f5f5;
 }
 
+.container-added-padding {
+    padding-bottom: 4px;
+}
+
+.container-added-padding-top {
+    padding-top: 4px;
+}
+
+.top-add-border {
+    border-top: 1px #ccc solid;
+}
+.bottom-add-border {
+    border-bottom: 1px #ccc solid;
+}
+
 .trigger-mail-open {
     cursor: pointer;
     *cursor: hand; /* OLD IE THING */

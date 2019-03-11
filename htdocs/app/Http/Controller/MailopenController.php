@@ -5,6 +5,7 @@ namespace App\Http\Controller;
 use App\System\Config\Config;
 use App\System\Controller;
 use App\System\Registry;
+use MS\Email\Parser\Parser;
 
 class MailopenController extends Controller
 {
@@ -28,11 +29,13 @@ class MailopenController extends Controller
 			$contentFound = true;
 		}
 
+		$message = (new Parser())->parse($content);
+
 		return $this
 			->getViewEngine()
 			->setLayout('layout/mail')
 			->assign([
-				'content' => $content,
+				'message' => $message,
 				'contentFound' => $contentFound,
  			]);
 	}

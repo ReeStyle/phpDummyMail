@@ -16,5 +16,7 @@
             "App\\": "htdocs/app/"
         }
     },
-    "require": {}
+    "require": {
+        "michaelesmith/email-parser": "*"
+    }
 }

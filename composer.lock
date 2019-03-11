@@ -1,0 +1,124 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "960469da7951a5d8e4d2d5d9b5177a57",
+    "packages": [
+        {
+            "name": "doctrine/collections",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/collections.git",
+                "reference": "4c926609fe198833934600b55d99ff6f59effaf5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/4c926609fe198833934600b55d99ff6f59effaf5",
+                "reference": "4c926609fe198833934600b55d99ff6f59effaf5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Doctrine\\Common\\Collections\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Collections Abstraction library",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "array",
+                "collections",
+                "iterator"
+            ],
+            "time": "2015-06-16T18:50:45+00:00"
+        },
+        {
+            "name": "michaelesmith/email-parser",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/michaelesmith/EmailParser.git",
+                "reference": "c8fad9ca3131a8fb0648e1cb91408f09f8b81c1b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/michaelesmith/EmailParser/zipball/c8fad9ca3131a8fb0648e1cb91408f09f8b81c1b",
+                "reference": "c8fad9ca3131a8fb0648e1cb91408f09f8b81c1b",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/collections": "1.2.*@dev",
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "MS\\Email\\Parser": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Smith",
+                    "email": "sitecross@gmail.com",
+                    "homepage": "http://michaelsmithonline.blogspot.com/"
+                }
+            ],
+            "description": "Parse an email into an object representation",
+            "homepage": "https://github.com/michaelesmith/EmailParser",
+            "keywords": [
+                "email",
+                "parse"
+            ],
+            "time": "2015-02-11T04:21:27+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
