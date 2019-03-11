@@ -2,7 +2,6 @@
 
 namespace App\System\Http;
 
-use App\System\Controller;
 use App\System\Registry;
 
 class Request
