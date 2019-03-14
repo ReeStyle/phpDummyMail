@@ -56,14 +56,29 @@ class MailUtilities
 	/**
 	 * @param string $filePath
 	 *
-	 * @return array
+	 * @return string
 	 */
 	public function getBaseInfoFromFile($filePath)
 	{
+		$content = file_get_contents($filePath);
 		$baseName = basename($filePath);
+
+		return $this->getBaseInfoFromContent($baseName, $content);
+	}
+
+	/**
+	 * @param string $baseName
+	 * @param string $content
+	 *
+	 * @return string
+	 */
+	public function getBaseInfoFromContent($baseName, $content)
+	{
 		$mailId = str_replace('.mail', '', $baseName);
 
-		$content = file_get_contents($filePath);
+		$timeStamp = str_replace('m_', '', $mailId);
+
+		$date = \DateTime::createFromFormat('YmdHisu', $timeStamp);
 
 		$parts = [];
 		preg_match('/^To: (.+)$/m', $content, $parts);
@@ -77,7 +92,21 @@ class MailUtilities
 		preg_match('/^Subject: (.+)$/m', $content, $parts);
 		$subject = count($parts) > 0 ? $parts[1] : null;
 
-		return sprintf('%s|%s|%s|%s', $mailId, $to, $from, $subject);
+		return sprintf('%s|%s|%s|%s|%s', $mailId, $to, $from, $date->format('d-M-Y H:i:s'), $subject);
+	}
+
+	/**
+	 * @param string $mailId
+	 *
+	 * @return bool|\DateTime
+	 */
+	public function getDateFromMailId($mailId)
+	{
+		$mailId = str_replace('.mail', '', $mailId);
+
+		$timeStamp = str_replace('m_', '', $mailId);
+
+		return \DateTime::createFromFormat('YmdHisu', $timeStamp);
 	}
 
 	/**
@@ -91,21 +120,35 @@ class MailUtilities
 
 		$output = [];
 		foreach ($contents as $row) {
-			$row = explode('|', $row, 4);
-
-			$mailId = $row[0];
-			$to = $row[1];
-			$from = $row[2];
-			$subject = $row[3];
-
-			$output[$mailId] = [
-				'to' => $to,
-				'from' => $from,
-				'subject' => $subject,
-			];
+			$info = $this->separateCacheLine($row);
+			$output[$info['mailId']] = $info;
 		}
 
 		return $output;
+	}
+
+	/**
+	 * @param string $cacheLine
+	 *
+	 * @return array
+	 */
+	public function separateCacheLine($cacheLine)
+	{
+		$row = explode('|', $cacheLine, 5);
+
+		$mailId = $row[0];
+		$to = $row[1];
+		$from = $row[2];
+		$date = $row[3];
+		$subject = $row[4];
+
+		return [
+			'mailId' => $mailId,
+			'to' => $to,
+			'from' => $from,
+			'date' => $date,
+			'subject' => $subject,
+		];
 	}
 
 	/**
@@ -132,6 +175,8 @@ class MailUtilities
 
 			$mailCache[$mailId] = $parts;
 		}
+
+		krsort($mailCache);
 
 		file_put_contents($cacheFile, implode(PHP_EOL, $mailCache));
 

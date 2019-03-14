@@ -16,6 +16,7 @@ class MailopenController extends Controller
 	public function content($mailId)
 	{
 		$content = (new MailUtilities())->getMail($mailId);
+		$date = (new MailUtilities())->getDateFromMailId($mailId);
 
 		$message = null;
 		if ($content !== false) {
@@ -26,6 +27,7 @@ class MailopenController extends Controller
 			->getViewEngine()
 			->setLayout('layout/mail')
 			->assign([
+				'date' => $date,
 				'message' => $message,
 				'contentFound' => $content !== false,
  			]);

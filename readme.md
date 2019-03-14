@@ -5,12 +5,14 @@ Prerequisites:
 versions from PHP5.6 on
 - Composer
 - \[path_to_phpdummymail]/mails/ and \[path_to_phpdummymail]/logs/ folders should be writable 
-for the web service (www-data on debian)  
+for the web service user (www-data on debian, apache on rhel/centos based)  
 
 
 Installation is simple:
-- Unpack (or clone with git) into a folder 
-- Run 'composer install' (DO NOT run 'composer update'!)
+- Clone or install (choose your path):
+    - Git clone into a folder
+        - Run 'composer install' (DO NOT run 'composer update'!)
+    - Composer: "composer create-project -s dev reestyle/phpdummymail phpdummymail"
 - Edit your php.ini (both CGI and CLI!) and edit the following line:
     - sendmail_path = \[path_to_phpdummymail]/receiver.php
 - Restart web service if necessary (e.g. apache fpm need to)

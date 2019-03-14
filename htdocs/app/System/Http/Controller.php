@@ -33,6 +33,7 @@ implements ControllerInterface
 		}
 
 		$controllerName = get_class($this);
+
 		if (!method_exists($this, $action)) {
 			throw new Exception(sprintf('%s does not contain action %s', $controllerName, $action));
 		}

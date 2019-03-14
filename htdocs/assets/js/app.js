@@ -17,8 +17,52 @@
 
                 $body.on(clickEvent, '.trigger-mail-open', app.mail.open);
                 $body.on(clickEvent, '.trigger-mail-selection', app.mail.select);
+                $body.on(clickEvent, '.trigger-modal-show', app.modal.open);
 
                 return ns;
+            },
+
+            modal: {
+                open: function (e) {
+                    var $this = $(this),
+                        modalUrl = $this.data('modal-url') || $this.attr('href'),
+                        modalType = $this.data('modal-type') || 'alert',
+                        modalCallback = $this.data('modal-callback') || null;
+
+                    preventDefault(e);
+
+                    $.get(
+                        modalUrl,
+                        function (response) {
+                            modalType === 'alert' && bootbox.alert(response);
+                            modalType === 'confirm' && bootbox.confirm(response, modalCallback);
+                            modalType === 'license' && (function () {
+                                var dlg = bootbox.dialog({
+                                    title: 'Licenses',
+                                    message: response,
+                                    size: 'large',
+                                    centerVertical: true,
+                                    show: false,
+                                    closeButton: true,
+                                    onEscape: true,
+                                    backdrop: true,
+                                    buttons: {
+                                        ok: {
+                                            label: 'Ok',
+                                            className: 'btn-primary'
+                                        }
+                                    }
+                                });
+
+                                setTimeout(function () {
+                                    dlg.modal('show');
+                                }, 150);
+                            }());
+                        }
+                    );
+
+                    return false;
+                }
             },
 
             toggle: {

@@ -1,4 +1,12 @@
-<?php
+<?php // Copy this file to 'config.php' - it should work out of the box, ut just in case, make adjustments accordingly
+
+$appRoot = $webRoot = null;
+
+// Important notice for nginx web service: include 'SCRIPT_NAME' in your server information if you want to use this!
+if (isset($_SERVER['SCRIPT_NAME'])) {
+	$appRoot = $_SERVER['SCRIPT_NAME']; // CLI does not have 'script name'
+	$webRoot = dirname($appRoot);
+}
 
 return [
 	'ini_set' => [
@@ -9,13 +17,13 @@ return [
 	],
 	'application' => [
 		'action_method' => 'pathinfo',
-		'webroot' => '/phpdummymail',
-		'approot' => '/phpdummymail/index.php',
-		'templates' => __DIR__ . '/../app/Http/views',
-		'logdir' => __DIR__ . '/../../logs',
+		'webroot' => $webRoot,
+		'approot' => $appRoot,
+		'templates' => BASEDIR . '/app/Http/views',
+		'logdir' => BASEDIR . '/../logs',
 	],
 	'mails' => [
-		'folder' => __DIR__ . '/../../mails',
+		'folder' => BASEDIR . '/../mails',
 	],
 	'templateer' => [
 		'use_minified_js' => false,

@@ -36,3 +36,19 @@ main {
     cursor: pointer;
     *cursor: hand; /* OLD IE THING */
 }
+
+.license-info {
+    font-size: 0.75em;
+}
+
+.license-info h1 {
+    font-size: 24px;
+}
+
+.license-info h2 {
+    font-size: 20px;
+}
+
+.license-info h3 {
+    font-size: 18px;
+}

@@ -7,11 +7,16 @@
         <input type="checkbox" value="<?=$mailId ?>" class="trigger-mail-selection" />
     </div>
     <div class="col">
-        <div class="small">
-            <div class="text-muted">
-            From: <?=htmlspecialchars($mail['from']) ?><br />
-            To: <?=htmlspecialchars($mail['to']) ?>
+        <div class="row">
+            <div class="col-8 text-muted small">
+                From: <?=htmlspecialchars($mail['from']) ?><br />
+                To: <?=htmlspecialchars($mail['to']) ?>
             </div>
+            <div class="col text-muted small">
+                Date:<br /> <?=$mail['date'] ?>
+            </div>
+        </div>
+        <div class="small">
 		    <?=$mail['subject'] ?>
         </div>
     </div>

@@ -23,6 +23,7 @@
         "michaelesmith/email-parser": "*",
         "php": ">=5.6.0",
         "psr/log": "^1.1@dev",
-        "league/climate": "^3.4"
+        "league/climate": "^3.4",
+        "league/commonmark": "^0.18.1"
     }
 }

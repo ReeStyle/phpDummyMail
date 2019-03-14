@@ -57,8 +57,16 @@ function processTo(array $toList)
         </div>
 	<?php else: ?>
 
+    <div class="row">
+        <div class="col-8 text-muted small">
+            From: <?=processTo([$message->getFrom()])?>
+        </div>
+        <div class="col text-muted small">
+            Date: <?=$date->format('j-M-Y H:i:s') ?>
+        </div>
+    </div>
+
         <div class="text-muted small bottom-add-border container-added-padding">
-            From: <?=processTo([$message->getFrom()])?><br/>
             To: <?=processTo($message->getTo()->toArray())?><br/>
             CC: <?=processTo($message->getCC()->toArray())?><br/>
             Subject: <?=$message->getSubject()?>
